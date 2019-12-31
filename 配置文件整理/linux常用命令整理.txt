@@ -1,0 +1,50 @@
+#tomcat命令：
+./shutdown.sh  ./startup.sh
+tail -f catalina.out  #查看tomcat运行日志       
+cat jeewx-2015-09-20.log | grep 验证码  #通过关键字搜索查看日志   
+grep -5 'parttern' catalina.out #打印匹配行的前后5行
+tail -n 500 -f catalina.out #查看最近50行日志         
+
+#java环境搭建命令：
+vi /etc/profile #加在文件最后
+JAVA_HOME=/usr/local/jdk1.8.0_144/
+PATH=$JAVA_HOME/bin:$PATH
+CLASSPATH=$JAVA_HOME/jre/lib/ext:$JAVA_HOME/lib/tools.jar
+export PATH JAVA_HOME CLASSPATH
+Esc+:wq #保存 
+:q! #不保存并退出
+
+source /etc/profile   #让配置的jdk立马生效
+
+#springboot命令：
+java -jar demo.jar #启动
+nohup java -jar demo.jar & #长期后台启动
+ps -ef | grep myproject-1.0.jar #捕获上个版本jar进程
+netstat -tunlp|grep 8080 #查看端口进程  lsof -i:8080
+kill -9 #杀死进程
+
+#yum命令：
+##nginx命令：
+yum install nginx -y #安装
+yum remove nginx -y #卸载
+nginx #启动
+nginx -s reload #重启并让配置生效
+nginx -s stop #停止服务
+nginx -t #检查配置文件是否正常
+##安装java环境：
+yum list java* #查看可安装java列表
+yum install java-1.8.0-openjdk* -y #选择java版本安装
+##安装mysql：
+yum install -y mysql-server mysql mysql-devel #安装mysql
+service mysqld restart #启动mysql
+/usr/bin/mysqladmin -u root password '123456' #设置mysql密码
+
+tar -zxvf apache-tomcat-8.5.16.tar.gz  #解压tar.gz文件
+jar -xvf demo.war #解压war包
+rm -rf /usr/local/apache-tomcat-8.5.15/webapps/test/   #删除文件夹命令
+cp -r bkxShopping /web_bak #备份项目
+
+netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+netstat -nat|grep -i "80"|wc -l  #查询80端口下连接数
+lsb_release -a  #查看linux版本
+sudo uname -m     # i686 //表示是32位  x86_64 // 表示是64位
